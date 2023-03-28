@@ -1,3 +1,5 @@
+
+
 import asyncio
 
 from aiogram.utils import executor
@@ -14,4 +16,4 @@ dp = Dispatcher(
         storage=storage,
     )
 db = DateBase()
-#import BOT.start
+import crypto_obrabotka.crypto_bot
