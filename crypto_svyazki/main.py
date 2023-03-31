@@ -7,6 +7,8 @@ import asyncio
 async def create(dispatcher: Dispatcher):
     await db.create()
 
+# test test
+
 if __name__ == '__main__':
     print("BOT START")
     executor.start_polling(dp,on_startup=create)
