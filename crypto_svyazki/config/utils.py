@@ -4,7 +4,7 @@ api_secret = "NLTGPyxp2dR3wA1zxqXcv3BZKuQRSmjqKukxws7uFrwsl6Be8v090rBdtHFi3ngJ"
 bybit_api_key = "506L5hWn46It9tlvy5"
 bybit_api_secret = "Js7JkDCDZsU0bF9MuN7XyNzOWkZCn2kk9rtB"
 
-OKX_key = ""
+OKX_key = "1"
 OKX_api_secter = ""
 
 prices = {

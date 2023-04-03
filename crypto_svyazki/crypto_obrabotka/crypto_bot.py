@@ -11,6 +11,7 @@ import requests
 import hashlib
 import json
 import asyncio
+import aiohttp
 #===========================================
 from binance.client import Client    #Бинанс
 from pybit import HTTP               #ByBit
@@ -46,41 +47,46 @@ async def get_all_token_OKX():
         "quoteCcy": "USDT",
         "api_key": OKX_key
     }
-    response = requests.get("https://www.okex.com/api/v5/market/tickers", params=params)
 
-    data = response.json()
-    for ticker in data["data"]:
-        symbol = ticker["instId"]
-        if symbol.split("-")[1] == "USDT":
-            prices["okx"][symbol.replace("-USDT","").lower()] = (float(ticker["askPx"]), float(ticker["bidPx"]))
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://www.okex.com/api/v5/market/tickers", params=params) as response:
+            data = await response.json()
+            for ticker in data["data"]:
+                symbol = ticker["instId"]
+                if symbol.split("-")[1] == "USDT":
+                    prices["okx"][symbol.replace("-USDT","").lower()] = (float(ticker["askPx"]), float(ticker["bidPx"]))
 
 async def get_all_token_huobi():
-    huobi_ticker_url = "https://api.huobi.pro/market/tickers"
-    huobi_tickers = requests.get(huobi_ticker_url).json()["data"]
-    for t in huobi_tickers:
-        symbol = t["symbol"]
-        if "usdt" in symbol:
-            prices["huobi"][symbol.replace("usdt","").lower()] = (float(t["ask"]), float(t["bid"]))
-
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://api.huobi.pro/market/tickers") as response:
+            data = await response.json()
+            for t in data["data"]:
+                    symbol = t["symbol"]
+                    if "usdt" in symbol:
+                        prices["huobi"][symbol.replace("usdt","").lower()] = (float(t["ask"]), float(t["bid"]))
 
 
 
 async def waiting():
-    await asyncio.wait([get_all_token_binance(), get_all_token_bybit(), get_all_token_OKX() , get_all_token_huobi()])
-    for currency in prices["binance"]:
-        if currency in prices["okx"] and currency in prices["huobi"] and currency in prices["bybit"]:
-            buy_price_binance, sell_price_binance = prices["binance"][currency]
-            buy_price_okx, sell_price_okx = prices["okx"][currency]
-            buy_price_huobi, sell_price_huobi = prices["huobi"][currency]
-            buy_price_bybit, sell_price_bybit = prices["bybit"][currency]
-            
-            # Находим максимальный sell_price и минимальный buy_price для нахождения процента
-            max_sell_price = max(sell_price_binance, sell_price_okx, sell_price_huobi, sell_price_bybit)
-            min_buy_price = min(buy_price_binance, buy_price_okx, buy_price_huobi, buy_price_bybit)
-            
-            # Считаем процент
-            if max_sell_price > 0 and min_buy_price > 0:
-                percent = ((max_sell_price - min_buy_price) / min_buy_price) * 100
-                print(f"{currency} percent: {percent}")
+    global prices
+    while True:
+        await asyncio.wait([get_all_token_binance(), get_all_token_bybit(), get_all_token_OKX() , get_all_token_huobi()])
+        for currency in prices["binance"]:
+            if all(currency in prices[exchange] for exchange in prices):
+                max_sell_price = max(prices[exchange][currency][1] for exchange in prices)
+                min_buy_price = min(prices[exchange][currency][0] for exchange in prices)
+                if min_buy_price > 0 and max_sell_price > 0:
+                    percent = ((max_sell_price - min_buy_price) / min_buy_price) * 100
+                    exchanges = [exchange for exchange in prices if prices[exchange][currency][0] == min_buy_price] + \
+                                [exchange for exchange in prices if prices[exchange][currency][1] == max_sell_price]
+                    if percent >= 0.5: 
+                        print(f"{currency}: Buy at {exchanges[0]}, sell at {exchanges[1]}, profit: {percent:.2f}%")
+                        print("azdfs")
+        prices = {
+            "binance": {},
+            "okx": {},
+            "huobi": {},
+            "bybit": {}   
+                }
 
 asyncio.run(waiting())
