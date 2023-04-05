@@ -81,7 +81,7 @@ async def waiting():
                                 [exchange for exchange in prices if prices[exchange][currency][1] == max_sell_price]
                     if percent >= 0.5: 
                         print(f"{currency}: Buy at {exchanges[0]}, sell at {exchanges[1]}, profit: {percent:.2f}%")
-                        print("azdfs")
+                    
         prices = {
             "binance": {},
             "okx": {},
@@ -89,4 +89,4 @@ async def waiting():
             "bybit": {}   
                 }
 
-asyncio.run(waiting())
+# asyncio.run(waiting())

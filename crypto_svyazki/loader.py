@@ -1,7 +1,6 @@
 
 
 import asyncio
-
 from aiogram.utils import executor
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -16,4 +15,4 @@ dp = Dispatcher(
         storage=storage,
     )
 db = DateBase()
-import crypto_obrabotka.crypto_bot
+import crypto_obrabotka.crypto_bot , BOT.start_handler , BOT.procent_handler , BOT.subscribe_handler

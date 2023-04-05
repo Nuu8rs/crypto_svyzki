@@ -13,3 +13,11 @@ prices = {
    "huobi": {},
    "bybit": {}   
 }
+
+
+#==========================
+url_start_message = "https://akm-img-a-in.tosshub.com/businesstoday/images/story/202303/bitcoin1-2000-7912c2175848490f99c66fb1a93a77ba-sixteen_nine.jpg?size=948:533"
+#==========================
+adress = "TNxnXJpCsqvv3sDJhYVZHAJ4YyAp7Pn4Ce"
+usdt_trc20_contract_address  = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+TRONGRID_API_URL = "https://api.trongrid.io"
