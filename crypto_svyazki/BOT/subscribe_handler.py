@@ -1,6 +1,5 @@
 import sys
 sys.path.insert(0, '../CRYPTO_SVYZKI')
-
 import ast
 from aiogram import types
 from aiogram.dispatcher import FSMContext
@@ -47,6 +46,7 @@ async def get_qr_usdt():
 
 @dp.callback_query_handler(text_contains="check_opl",state="*")
 async def add_otvet(query: CallbackQuery, state: FSMContext):
+   await query.answer()
    result = await get_info_ca()
    #Сделать проверку через езерскан кошеля привязанного в utils и проверку добавить
    #status = await check_status_opl(query.data.split(":")[-1])
@@ -61,6 +61,7 @@ async def get_info_ca():
       amounts_to_check = [0.01, 7, 30]
       start_timestamp = int(time.time() * 1000) - 86400 * 1000  # Check transactions for the last 24 hours
       transactions =  get_transactions(start_timestamp)
+      print(transactions)
       transfers =  get_usdt_trc20_transfers(transactions)
       found_amounts = []
       print(transfers)
@@ -76,7 +77,8 @@ async def get_info_ca():
 
 def get_transactions(start_timestamp=0):
     time_lookback = datetime.utcnow() - timedelta(hours=5)
-    url = f"{TRONGRID_API_URL}/v1/accounts/{adress}/transactions?min_timestamp={start_timestamp}&search_internal=false&limit=50"
+    url = f"{TRONGRID_API_URL}/v1/accounts/{adress}/transactions"
+    print(url)
     response = requests.get(url)
     return response.json()
 def get_usdt_trc20_transfers(transactions):

@@ -42,7 +42,6 @@ class DateBase:
                
                 await cur.execute(f'SELECT `procent`,`reg_user` FROM `user` WHERE `ID` = "{user_id}";')
                 result = await cur.fetchall()
-                print(result)
                 return result[0]
                 
     async def full_info_subscribe(self , user_id):
@@ -65,4 +64,29 @@ class DateBase:
                 except:
                     pass
      
-    
+    async def get_all_users_info(self):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                try:
+                    await conn.begin()
+                    await cur.execute(f'SELECT `ID`,`procent`,`subscribe`,`last_svyazka`;')
+                    result = await cur.fetchall()
+                    return result[0]
+                except:
+                    pass        
+
+    async def delete_subscribe(self , user_id ):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                try:
+                    await conn.begin()
+                    await cur.execute(f'UPDATE `user` SET `procent` = "'+str("Не установлен")+'" WHERE `ID` LIKE "'+str(user_id)+'";')
+                    await conn.commit()
+
+                    await conn.begin()
+                    await cur.execute(f'UPDATE `user` SET `subscribe` = "'+str("Подписка не активна")+'" WHERE `ID` LIKE "'+str(user_id)+'";')
+                    await conn.commit()
+                except:
+                    pass  
+
+  
