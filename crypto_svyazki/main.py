@@ -5,7 +5,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from crypto_obrabotka.crypto_bot import waiting
 import asyncio
 async def create(dispatcher: Dispatcher):
-    asyncio.create_task(waiting())
+    # asyncio.create_task(waiting())
     await db.create()
 
 # test test

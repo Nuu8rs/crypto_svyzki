@@ -35,13 +35,13 @@ async def get_all_token_binance():
     usdt_tokens = [ticker for ticker in tickers if ticker['symbol'].endswith('USDT')]
 
     for token in usdt_tokens:
-        if not any(token["symbol"].replace("USDT","").lower() in currency.lower() for currency in ban_token):
+        if not any(token["symbol"].replace("USDT","").lower() in currency.lower() for currency in ban_token) and token["symbol"].replace("USDT","").lower()[-2:] not in ["3s","3l"] :
             prices["binance"][token["symbol"].replace("USDT","").lower()] = (float(token["askPrice"]), float(token["bidPrice"]))
 async def get_all_token_bybit():
     global HTTP
     results = http.best_bid_ask_price()
     for x in results.get("result"):
-        if "USDT" in x["symbol"]  and not any(x["symbol"].replace("USDT","").lower() in currency.lower() for currency in ban_token):
+        if "USDT" in x["symbol"]  and not any(x["symbol"].replace("USDT","").lower() in currency.lower() for currency in ban_token) and x["symbol"].replace("USDT","").lower()[-2:]not in ["3s","3l"]:
             prices["bybit"][x["symbol"].replace("USDT","").lower()] = (float(x["askPrice"]), float(x["bidPrice"]))
 
 async def get_all_token_kraken():
@@ -49,7 +49,7 @@ async def get_all_token_kraken():
         async with session.get("https://api.kraken.com/0/public/Ticker") as response:
             data = await response.json()
             for market, ticker_data in data['result'].items():
-                if market.endswith('USDT') and not any(market.replace("USDT","").lower() in currency.lower() for currency in ban_token):
+                if market.endswith('USDT') and not any(market.replace("USDT","").lower() in currency.lower() for currency in ban_token) and market.replace("USDT","").lower()[-2:]not in ["3s","3l"]:
                     prices["kraken"][market.replace("USDT","").lower()] = (float(ticker_data['a'][0]), float(ticker_data['b'][0]))
             
 async def get_all_token_OKX():
@@ -64,7 +64,7 @@ async def get_all_token_OKX():
             data = await response.json()
             for ticker in data["data"]:
                 symbol = ticker["instId"]
-                if symbol.split("-")[1] == "USDT" and not any(symbol.replace("-USDT","").lower() in currency.lower() for currency in ban_token):
+                if symbol.split("-")[1] == "USDT" and not any(symbol.replace("-USDT","").lower() in currency.lower() for currency in ban_token) and symbol.replace("-USDT","").lower()[-2:]not in ["3s","3l"]:
                     prices["okx"][symbol.replace("-USDT","").lower()] = (float(ticker["askPx"]), float(ticker["bidPx"]))
 
 async def get_all_token_huobi():
@@ -74,7 +74,7 @@ async def get_all_token_huobi():
                 data = await response.json()
                 for t in data["data"]:
                         symbol = t["symbol"]
-                        if "usdt" in symbol  and not any(symbol.replace("usdt","").lower() in currency.lower() for currency in ban_token):
+                        if "usdt" in symbol  and not any(symbol.replace("usdt","").lower() in currency.lower() for currency in ban_token) and symbol.replace("usdt","").lower()[-2:]not in ["3s","3l"]:
                             prices["huobi"][symbol.replace("usdt","").lower()] = (float(t["ask"]), float(t["bid"]))
     except:
         return await get_all_token_huobi
@@ -90,7 +90,7 @@ async def get_all_tokem_gate():
             for symbol, ticker in usdt_pairs.items():    
                 try:
                     
-                    if not any(symbol.replace("_usdt","").lower() in currency.lower() for currency in ban_token):
+                    if not any(symbol.replace("_usdt","").lower() in currency.lower() for currency in ban_token) and symbol.replace("_usdt","").lower()[-2:]not in ["3s","3l"]:
                         prices["gate"][symbol.replace("_usdt","").lower()] = (float(ticker['lowestAsk']), float(ticker['highestBid']))
                 except:
                     pass
@@ -103,7 +103,7 @@ async def get_all_token_kucoin():
     for pair in usdt_pairs:
         try:
             symbol = pair['symbolName'].replace("-USDT","")
-            if not any(symbol.lower() in currency.lower() for currency in ban_token):
+            if not any(symbol.lower() in currency.lower() for currency in ban_token)  and symbol.lower()[-2:]not in ["3s","3l"]:
                 prices["kucoin"][symbol.lower()] = (float(pair['buy']), float(pair['sell']))
         except:
             pass
@@ -118,7 +118,7 @@ async def get_all_token_crypto():
                 try:
                     symbol = tiket["i"]
                     if symbol.endswith("_USDT"):
-                        if not any(symbol.replace("_USDT","").lower() in currency.lower() for currency in ban_token):
+                        if not any(symbol.replace("_USDT","").lower() in currency.lower() for currency in ban_token) and symbol.replace("_USDT","").lower()[-2:]not in ["3s","3l"]:
                             prices["crypto"][symbol.replace("_USDT","").lower()] = (float(tiket["a"]),float(tiket["b"]))
                 except:
                     pass   
@@ -132,7 +132,7 @@ async def get_all_token_bitfinex():
             for pair in usdt_pairs:
                 try:
                     symbol = pair[0][1:]
-                    if not any(symbol.lower() in currency.lower() for currency in ban_token):
+                    if not any(symbol.lower() in currency.lower() for currency in ban_token) and symbol.replace("UST","").lower()[-2:]not in ["3s","3l"]:
                         prices["bitfinex"][symbol.replace("UST","").replace(":","").lower()] = (float(pair[3]),float(pair[1]))
                 except:
                     pass   
@@ -146,7 +146,7 @@ async def get_all_token_mexc():
             for pair in usdt_pairs:
                 try:
                     symbol = pair["symbol"].replace("_USDT","").lower()
-                    if not any(symbol.lower() in currency.lower() for currency in ban_token):
+                    if not any(symbol.lower() in currency.lower() for currency in ban_token) and symbol.lower()[-2:]not in ["3s","3l"]:
                         prices["mexc"][symbol] = (float(pair["ask"]),float(pair["bid"]))
                 except:
                     pass   
@@ -182,7 +182,7 @@ async def get_all_token_exmo():
     usdt_pair_data = {}
     for pair in usdt_pairs:
         symbol = pair.replace("_USDT","").lower()
-        if not any(symbol.lower() in currency.lower() for currency in ban_token):
+        if not any(symbol.lower() in currency.lower() for currency in ban_token) and symbol.lower()[-2:]not in ["3s","3l"] :
             prices["exmo"][symbol] = (float(tickers[pair]['ask'][0][0]),float(tickers[pair]['bid'][0][0]))
     
 
@@ -194,7 +194,7 @@ async def get_all_token_poloniex():
                 try:
                     if pair.startswith("USDT"):
                         symbol = pair.replace("USDT_","").lower()
-                        if not any(symbol.lower() in currency.lower() for currency in ban_token):
+                        if not any(symbol.lower() in currency.lower() for currency in ban_token) and symbol.lower()[-2:]not in ["3s","3l"]:
                             prices["poloniex"][symbol] = (float(data['lowestAsk']),float(data['highestBid']))
                 except:
                     pass
@@ -203,38 +203,41 @@ async def get_all_token_poloniex():
 async def waiting():
     global prices
     while True:
-        arr_tokens = []
-#        await asyncio.wait([get_all_token_binance(),get_all_tokem_gate(),get_all_token_crypto()])
+        try:
+            arr_tokens = []
+    #       await asyncio.wait([get_all_token_binance(),get_all_tokem_gate(),get_all_token_crypto()])
 
-        await asyncio.wait([get_all_token_binance(), get_all_token_bybit(), get_all_token_OKX() , get_all_token_huobi(),get_all_token_kraken(),get_all_tokem_gate(),get_all_token_kucoin(),get_all_token_crypto() , get_all_token_bitfinex(),get_all_token_mexc() , get_all_token_exmo() , get_all_token_poloniex()])
-        for currency in set(prices["binance"]).union(prices["okx"]).union(prices["huobi"]).union(prices["bybit"]).union(prices["kraken"]).union(prices["kucoin"]).union(prices["gate"]).union(prices["crypto"]).union(prices["bitfinex"]).union(prices["mexc"]).union(prices["exmo"]).union(prices["poloniex"]):
-            if sum(currency in prices[exchange] for exchange in prices) >= 2:
-                max_sell_price = max(prices[exchange][currency][1] for exchange in prices if currency in prices[exchange])
-                min_buy_price = min(prices[exchange][currency][0] for exchange in prices if currency in prices[exchange])
+            await asyncio.wait([get_all_token_binance(), get_all_token_bybit(), get_all_token_OKX() , get_all_token_huobi(),get_all_token_kraken(),get_all_tokem_gate(),get_all_token_kucoin(),get_all_token_crypto() , get_all_token_bitfinex(),get_all_token_mexc() , get_all_token_exmo() , get_all_token_poloniex()])
+            for currency in set(prices["binance"]).union(prices["okx"]).union(prices["huobi"]).union(prices["bybit"]).union(prices["kraken"]).union(prices["kucoin"]).union(prices["gate"]).union(prices["crypto"]).union(prices["bitfinex"]).union(prices["mexc"]).union(prices["exmo"]).union(prices["poloniex"]):
+                if sum(currency in prices[exchange] for exchange in prices) >= 2:
+                    max_sell_price = max(prices[exchange][currency][1] for exchange in prices if currency in prices[exchange])
+                    min_buy_price = min(prices[exchange][currency][0] for exchange in prices if currency in prices[exchange])
 
-                if min_buy_price > 0 and max_sell_price > 0:
-                    percent = ((max_sell_price - min_buy_price) / min_buy_price) * 100
-                    exchanges = [exchange for exchange in prices if currency in prices[exchange] and  prices[exchange][currency][0] == min_buy_price ] + \
-                                [exchange for exchange in prices if currency in prices[exchange] and prices[exchange][currency][1] == max_sell_price ]
-                    
-                    
-                    if float(percent) >= 0 and exchanges[0] != exchanges[1]: 
-                        arr_tokens.append({"token":currency,"one":f"{exchanges[0]}","two":f"{exchanges[1]}","profit":f"{percent:.2f}"})
-        await send_inforamtion(arr_tokens)            
-        prices = {
-            "binance": {},
-            "okx": {},
-            "huobi": {},
-            "bybit": {},
-            "kraken" : {},
-            "kucoin" : {},
-            "gate"   : {},
-            "crypto" : {},
-            "bitfinex" : {},
-            "mexc" : {},
-            "exmo" : {},
-            "poloniex": {},
-                }
+                    if min_buy_price > 0 and max_sell_price > 0:
+                        percent = ((max_sell_price - min_buy_price) / min_buy_price) * 100
+                        exchanges = [exchange for exchange in prices if currency in prices[exchange] and  prices[exchange][currency][0] == min_buy_price ] + \
+                                    [exchange for exchange in prices if currency in prices[exchange] and prices[exchange][currency][1] == max_sell_price ]
+                        
+                        
+                        if float(percent) >= 0 and exchanges[0] != exchanges[1]: 
+                            arr_tokens.append({"token":currency,"one":f"{exchanges[0]}","two":f"{exchanges[1]}","profit":f"{percent:.2f}"})
+            await send_inforamtion(arr_tokens)            
+            prices = {
+                "binance": {},
+                "okx": {},
+                "huobi": {},
+                "bybit": {},
+                "kraken" : {},
+                "kucoin" : {},
+                "gate"   : {},
+                "crypto" : {},
+                "bitfinex" : {},
+                "mexc" : {},
+                "exmo" : {},
+                "poloniex": {},
+                    }
+        except Exception as E:
+            print(E)
 #"hotbit" : {},      
 
 async def get_address_token(token,adress1,addres2):
@@ -254,13 +257,12 @@ async def get_address_token(token,adress1,addres2):
     return text_link
 
 async def send_inforamtion(arr_tokens):
-    list_users = await get_all_users_info()
+    list_users = await db.get_all_users_info()
     for user in list_users:
         id_user           = user[0]
         procent           = user[1]
-        procent = "0.5-100"
+        procent = "50-100"
         subscribe         = user[2]
-        last_token_svayzk = user[3]
         if "Подписка"  in subscribe :
             continue
         elif int(time.time()) >= int(subscribe):
@@ -272,39 +274,16 @@ async def send_inforamtion(arr_tokens):
                 try:
                     if float(info['profit']) >= float(procent.split("-")[0]) and float(info['profit']) <= float(procent.split("-")[-1]):
                         text_url = await get_address_token(info['token'] , info['one'] , info['two'])
-                        text += f"📈 Купить токен : <code>{info['token'].upper()}/USDT</code> на бирже <b><u>{info['one']}</u></b> И продать на бирже <b><u>{info['two']}</u></b> \n📍 Сумма арбитража: <b>{info['profit']}</b> % [{text_url}]\n\n"
+                        text += f"""<code>{info['token'].upper()+"/USDT":11} {info['one']:7}➡️ {info['two']:7} {info['profit']:4}% </code>[{text_url}]\n"""
+                        
+                        # text += f"📈 Купить токен : <code>{info['token'].upper()}/USDT</code> на бирже <b><u>{info['one']}</u></b> И продать на бирже <b><u>{info['two']}</u></b> \n📍 Сумма арбитража: <b>{info['profit']}</b> % [{text_url}]\n\n"
                 except:
                     pass
             if text != "":
-                arr_text = text.split("\n\n")
-                n = 15
-                result = ['\n\n'.join(arr_text[i:i+n]) for i in range(0, len(arr_text), n)]
+                arr_text = text.split("\n")
+                n = 60
+                result = ['\n'.join(arr_text[i:i+n]) for i in range(0, len(arr_text), n)]
                 for texts in result:
-                    await bot.send_message(id_user,"▫️ <b>Нашлись крипто связки</b> ▫️\n\n"+texts)
-async def get_all_users_info():
-        pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                        user='Nursyka', password='1234',
-                                        db='crypto_bot') 
-        async with pool.acquire() as conn:
-            async with conn.cursor() as cur:
-                try:
-                    await conn.begin()
-                    await cur.execute(f'SELECT `ID`,`procent`,`subscribe`,`last_svyazka`FROM `user` ;')
-                    result = await cur.fetchall()
-                    return result
-                except:
-                    pass     
+                    await bot.send_message(id_user,"▫️ <b>Нашлись крипто связки</b> ▫️\n\n"+texts,disable_web_page_preview=True)
 
-async def add_lst_sv(user_id , svyazka):
-        pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                        user='Nursyka', password='1234',
-                                        db='crypto_bot') 
-        async with pool.acquire() as conn:
-            async with conn.cursor() as cur:
-                try:
-                    await conn.begin()
-                    await cur.execute(f'UPDATE `user` SET `last_svyazka` = "'+str(svyazka)+'" WHERE `ID` LIKE "'+str(user_id)+'";')
-                    await conn.commit()
-                except:
-                    pass      
-
+# async def send_message():
