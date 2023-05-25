@@ -8,7 +8,7 @@ from aiogram.dispatcher.filters import CommandStart
 from aiogram.dispatcher.filters import Text
 from aiogram.types import CallbackQuery
 from aiogram.types import Message
-from keyboards.setting_arbit import get_menu_black
+from keyboards.setting_arbit import get_menu_black , get_ban_token
 import random
 #==================================================
 from loader import bot, dp , db
@@ -57,6 +57,20 @@ async def add_otvet(query: CallbackQuery, state: FSMContext):
 async def start(msg : types.Message, state: FSMContext):
    try:
       await db.add_ban_token(msg.from_user.id,msg.text)
-      await msg.answer(f"Токен : {msg.text} был успешно внесен в черный список ✅")
+      await msg.answer(f"Токен : <code>{msg.text.upper()}</code> был успешно внесен в черный список ✅")
    except Exception as E:
       print(E)
+
+
+@dp.callback_query_handler(text_contains="anban",state="*")
+async def add_otvet(query: CallbackQuery, state: FSMContext):
+   await query.message.edit_text("📍 Выберите <b>токен</b> , который хотите убрать с черного списка",reply_markup= await get_ban_token(query.from_user.id))
+
+
+@dp.callback_query_handler(text_contains="unban",state="*")
+async def add_otvet(query: CallbackQuery, state: FSMContext):
+   await query.answer()
+   name_token = query.data.split(":")[1]
+   await db.return_token(query.from_user.id , name_token)
+   await query.message.edit_reply_markup(reply_markup=await get_ban_token(query.from_user.id))
+   await query.message.answer(f"Токен <code>{name_token}</code> был успешно удален с чёрного списка ✅")

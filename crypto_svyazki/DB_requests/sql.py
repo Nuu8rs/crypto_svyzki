@@ -161,7 +161,42 @@ class DateBase:
                         tokens_last = tokens_last[0][0]
                         if tokens_last == ():
                             tokens_last = ""
-                        token = tokens_last + token_name+","
+                        token = tokens_last + token_name.upper()+","
+                        await cur.execute(f'UPDATE `user` SET `ban_token` = "{token}" WHERE `ID` LIKE "'+str(user_id)+'";')
+                        await conn.commit()   
+                    except Exception as E:
+                        print(E)
+                        
+    async def get_ban_token(self,user_id):
+            pool = await aiomysql.create_pool(host='localhost', port=3306,
+                                            user='Nursyka', password='1234',
+                                            db='crypto_bot') 
+            async with pool.acquire() as conn:
+                async with conn.cursor() as cur:
+                    try:
+                        await cur.execute(f'SELECT `ban_token` FROM `user` WHERE `ID` = "{user_id}";')
+                        tokens_last = await cur.fetchall()  
+                        tokens_last = tokens_last[0][0]
+                        if tokens_last == ():
+                            return []
+                        tokens_ban = tokens_last.split(",")[:-1]
+                        return tokens_ban
+                    except:
+                        pass
+    
+    async def return_token(self,user_id,token_name):
+            pool = await aiomysql.create_pool(host='localhost', port=3306,
+                                            user='Nursyka', password='1234',
+                                            db='crypto_bot') 
+            async with pool.acquire() as conn:
+                async with conn.cursor() as cur:
+                    try:
+                        await cur.execute(f'SELECT `ban_token` FROM `user` WHERE `ID` = "{user_id}";')
+                        tokens_last = await cur.fetchall()  
+                        tokens_last = tokens_last[0][0]
+                        if tokens_last == ():
+                            tokens_last = ""
+                        token = tokens_last.replace(f"{token_name.upper()},","")
                         await cur.execute(f'UPDATE `user` SET `ban_token` = "{token}" WHERE `ID` LIKE "'+str(user_id)+'";')
                         await conn.commit()   
                     except Exception as E:
