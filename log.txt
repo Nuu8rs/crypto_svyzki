@@ -1,0 +1,3 @@
+[2023-05-26 | 02:37: INFO:] Bot started
+[2023-05-26 | 02:37: INFO:] DataBase started
+[2023-05-26 | 02:37: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]

@@ -2,14 +2,16 @@ import aiomysql
 import ast
 import time
 import datetime
-
+import sys
+sys.path.insert(0, '../CRYPTO_SVYZKI')
+from config.utils import host,port,user,password,db
 class DateBase:
     def __init__(self):
         self.pool = None
     async def create(self):
-        pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                        user='Nursyka', password='1234',
-                                        db='crypto_bot')
+        pool = await aiomysql.create_pool(host=host, port=port,
+                                        user=user, password=password,
+                                        db=db)
         self.pool = pool
 
     async def check_user(self,user_id):
@@ -89,11 +91,8 @@ class DateBase:
                 except:
                     pass  
     async def get_all_users_info(self):
-            pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                            user='Nursyka', password='1234',
-                                            db='crypto_bot') 
-            async with pool.acquire() as conn:
-                async with conn.cursor() as cur:
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
                     try:
                         await conn.begin()
                         await cur.execute(f'SELECT `ID`,`procent`,`subscribe`,`last_svyazka`FROM `user` ;')
@@ -103,11 +102,8 @@ class DateBase:
                         pass     
 
     async def add_lst_sv(self, user_id , svyazka):
-            pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                            user='Nursyka', password='1234',
-                                            db='crypto_bot') 
-            async with pool.acquire() as conn:
-                async with conn.cursor() as cur:
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
                     try:
                         await conn.begin()
                         await cur.execute(f'UPDATE `user` SET `last_svyazka` = "'+str(svyazka)+'" WHERE `ID` LIKE "'+str(user_id)+'";')
@@ -116,11 +112,8 @@ class DateBase:
                         pass      
 
     async def get_user_metod(self,user_id):
-            pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                            user='Nursyka', password='1234',
-                                            db='crypto_bot') 
-            async with pool.acquire() as conn:
-                async with conn.cursor() as cur:
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
                     try:
                         await conn.begin()
                         await cur.execute(f'SELECT `metod` FROM `user` WHERE `ID` = "{user_id}";')
@@ -129,11 +122,8 @@ class DateBase:
                     except:
                         pass
     async def change_metod(self,user_id):
-            pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                            user='Nursyka', password='1234',
-                                            db='crypto_bot') 
-            async with pool.acquire() as conn:
-                async with conn.cursor() as cur:
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
                     try:
                         await conn.begin()
                         await cur.execute(f'SELECT `metod` FROM `user` WHERE `ID` = "{user_id}";')
@@ -150,11 +140,8 @@ class DateBase:
                     except:
                         pass
     async def add_ban_token(self,user_id,token_name):
-            pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                            user='Nursyka', password='1234',
-                                            db='crypto_bot') 
-            async with pool.acquire() as conn:
-                async with conn.cursor() as cur:
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
                     try:
                         await cur.execute(f'SELECT `ban_token` FROM `user` WHERE `ID` = "{user_id}";')
                         tokens_last = await cur.fetchall()  
@@ -168,11 +155,8 @@ class DateBase:
                         print(E)
                         
     async def get_ban_token(self,user_id):
-            pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                            user='Nursyka', password='1234',
-                                            db='crypto_bot') 
-            async with pool.acquire() as conn:
-                async with conn.cursor() as cur:
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
                     try:
                         await cur.execute(f'SELECT `ban_token` FROM `user` WHERE `ID` = "{user_id}";')
                         tokens_last = await cur.fetchall()  
@@ -185,11 +169,8 @@ class DateBase:
                         pass
     
     async def return_token(self,user_id,token_name):
-            pool = await aiomysql.create_pool(host='localhost', port=3306,
-                                            user='Nursyka', password='1234',
-                                            db='crypto_bot') 
-            async with pool.acquire() as conn:
-                async with conn.cursor() as cur:
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
                     try:
                         await cur.execute(f'SELECT `ban_token` FROM `user` WHERE `ID` = "{user_id}";')
                         tokens_last = await cur.fetchall()  
@@ -198,6 +179,33 @@ class DateBase:
                             tokens_last = ""
                         token = tokens_last.replace(f"{token_name.upper()},","")
                         await cur.execute(f'UPDATE `user` SET `ban_token` = "{token}" WHERE `ID` LIKE "'+str(user_id)+'";')
+                        await conn.commit()   
+                    except Exception as E:
+                        print(E)
+
+    async def get_status_birje(self,user_id):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                    try:
+                        await cur.execute(f'SELECT `ban_birj` FROM `user` WHERE `ID` = "{user_id}";')
+                        birje = await cur.fetchall()  
+                        birje = birje[0][0]
+                        return birje
+
+                    except Exception as E:
+                        print(E)
+    
+    async def edit_ban_birje(self,user_id,ban_birje):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                    try:
+                        await cur.execute(f'SELECT `ban_birj` FROM `user` WHERE `ID` = "{user_id}";')
+                        birje = await cur.fetchall()  
+                        birje = birje[0][0]
+                        tex_status = birje.split(f"{ban_birje}:")[1].split(",")[0]
+                        tex_status_new = "True" if tex_status == "False" else "False"
+                        birje_new = birje.replace(f"{ban_birje}:{tex_status}",f"{ban_birje}:{tex_status_new}")
+                        await cur.execute(f'UPDATE `user` SET `ban_birj` = "{birje_new}" WHERE `ID` LIKE "'+str(user_id)+'";')
                         await conn.commit()   
                     except Exception as E:
                         print(E)
