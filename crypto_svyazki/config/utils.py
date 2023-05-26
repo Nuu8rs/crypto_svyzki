@@ -33,6 +33,10 @@ url_start_message = "https://akm-img-a-in.tosshub.com/businesstoday/images/story
 adress = "TNxnXJpCsqvv3sDJhYVZHAJ4YyAp7Pn4Ce"
 usdt_trc20_contract_address  = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
 TRONGRID_API_URL = "https://api.trongrid.io"
-ban_token = ["eur","btcup","QI","mc","lunc","umb"]
+ban_token = ["eur","btcup","QI","mc","lunc","umb","ethup"]
 
 host,port,user,password,db = 'localhost', 3306,'Nursyka','1234','crypto_bot'
+
+
+
+

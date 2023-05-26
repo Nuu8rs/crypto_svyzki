@@ -53,7 +53,11 @@ async def add_otvet(query: CallbackQuery, state: FSMContext):
 @dp.message_handler(state="addban_token")
 async def start(msg : types.Message, state: FSMContext):
    try:
-      await db.add_ban_token(msg.from_user.id,msg.text)
+      try:
+         ban_token = msg.text.split("/")[0]
+      except:
+         ban_token = msg.text
+      await db.add_ban_token(msg.from_user.id,ban_token)
       await msg.answer(f"""Токен : <code>{msg.text.upper().replace(" ","")}</code> был успешно внесен в черный список ✅""")
    except Exception as E:
       print(E)

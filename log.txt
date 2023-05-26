@@ -1,3 +1,67 @@
 [2023-05-26 | 02:37: INFO:] Bot started
 [2023-05-26 | 02:37: INFO:] DataBase started
 [2023-05-26 | 02:37: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 12:10: INFO:] Bot started
+[2023-05-26 | 12:10: INFO:] DataBase started
+[2023-05-26 | 12:10: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 12:10: INFO:] Start polling.
+[2023-05-26 | 12:13: INFO:] Bot started
+[2023-05-26 | 12:13: INFO:] DataBase started
+[2023-05-26 | 12:13: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 12:13: INFO:] Start polling.
+[2023-05-26 | 12:13: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-163' coro=<Dispatcher._process_polling_updates() done, defined at C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=MessageNotModified('Message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message')>
+Traceback (most recent call last):
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "c:\Users\ART\Desktop\crypto_svyzki\crypto_svyazki\BOT\settings_handler.py", line 77, in add_otvet
+    await query.message.edit_reply_markup(reply_markup=await get_ban_token(query.from_user.id))
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\types\message.py", line 2934, in edit_reply_markup
+    return await self.bot.edit_message_reply_markup(
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 2902, in edit_message_reply_markup
+    result = await self.request(api.Methods.EDIT_MESSAGE_REPLY_MARKUP, payload)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 115, in check_result
+    exceptions.BadRequest.detect(description)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
+    raise err(cls.text or description)
+aiogram.utils.exceptions.MessageNotModified: Message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+[2023-05-26 | 12:13: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-189' coro=<Dispatcher._process_polling_updates() done, defined at C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=MessageNotModified('Message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message')>
+Traceback (most recent call last):
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "c:\Users\ART\Desktop\crypto_svyzki\crypto_svyazki\BOT\settings_handler.py", line 77, in add_otvet
+    await query.message.edit_reply_markup(reply_markup=await get_ban_token(query.from_user.id))
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\types\message.py", line 2934, in edit_reply_markup
+    return await self.bot.edit_message_reply_markup(
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 2902, in edit_message_reply_markup
+    result = await self.request(api.Methods.EDIT_MESSAGE_REPLY_MARKUP, payload)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 115, in check_result
+    exceptions.BadRequest.detect(description)
+  File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
+    raise err(cls.text or description)
+aiogram.utils.exceptions.MessageNotModified: Message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
