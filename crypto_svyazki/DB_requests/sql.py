@@ -13,7 +13,7 @@ class DateBase:
                                         user=user, password=password,
                                         db=db)
         self.pool = pool
-
+        
     async def check_user(self,user_id):
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
@@ -22,6 +22,15 @@ class DateBase:
                 result = await cur.fetchall()
                 if not result:
                     return True
+    async def select_user(self,user_id):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+               
+                await cur.execute(f'SELECT `lang` FROM `user` WHERE `ID` = "{user_id}";')
+                result = await cur.fetchall()
+                if not result:
+                    return ['ru']
+                return result[0]
     async def add_user(self,user_id,tag_user):
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
@@ -209,3 +218,13 @@ class DateBase:
                         await conn.commit()   
                     except Exception as E:
                         print(E)
+    
+    async def get_translated_text(self,text,language):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+               
+                await cur.execute(f'SELECT `{language}` FROM `translated_text` WHERE `ru` = "{text}";')
+                result = await cur.fetchall()
+                if not result:
+                    return [text]
+                return result[0]
