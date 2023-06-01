@@ -1,45 +1,158 @@
-import requests
+from binance.client import Client
+import asyncio
+import binance.client
+import re
+# Insert your API keys
+api_key = "nTfCKRwFem4nLTeDisMrZelsxrgKeQYyXlP0rKeaiY05giJOyT5zTiEYWiqtEEA7"
+api_secret = "NLTGPyxp2dR3wA1zxqXcv3BZKuQRSmjqKukxws7uFrwsl6Be8v090rBdtHFi3ngJ"
+currencies_all = ['PROS', 'ASTR', 'HARD', 'EGLD', 'ALCX', 'XAF', 'VIDT', 'WBTC', 'GALA', 'DREP', 'DKK', 'WIN', 'DAI', 'VET', 'PROM', 'FILUP', '1INCHDOWN', 'MKR', 'OSMO', 'SDG', 'MTLX', 'PAX', 'TWT', 'DOGE', 'DGB', 'MLN', 'DOT', 'NZD', 'FTM', 'ONG', 'BCHUP', 'XMR', 'CHF', 'BCH', 'TROY', 'ORN', 'MAGIC', 'ARS', 'UNFI', 'BAR', 'BCHA', 'IDEX', 'MXN', 'HIFI', 'FARM', 'IOST', 'ZEC', 'SAR', 'XNO', 'SXPDOWN', 'KNCL', 'XLMUP', 'JASMY', 'TWD', 'GLM', 'CHZ', 'LRC', 'ANKR', 'TRXOLD', 'FILDOWN', '1INCHUP', 'CTSI', 'MINA', 'LAZIO', 'SOL', 'ALGO', 'BEL', 'PKR', 'PIVX', 'UAH', 'T', 'DF', 'SPELL', 'INJ', 'CLP', 'ICX', 'SUSHI', 'GNS', 'AAVEUP', 'HFT', 'MA', 'PUNDIX', 'DIA', 'UYU', 'XRPUP', 'AGLD', 'IOTX', 'TFUEL', 'STMX', 'PARA', 'IMX', 'XEM', 'WING', 'RVN', 'BNX', 'BND', 'FIO', 'HOOK', 'AXS', 'ADADOWN', 'SRM', 'MBOX', 'ACA', 'FLR', 'CVC', 'BCHDOWN', 'YFIDOWN', 'MBL', 'OG', 'BGN', 'QKC', 'BNBDOWN', 'OM', 'LTCUP', 'ARDR', 'WNXM', 'RLC', 'EVX', 'AED', 'BTTC', 
+'WETH', 'TVK', 'COTI', 'LIT', 'REEF', 'STPT', 'YFI', 'KWD', 'HIVE', 'SUI', 'KHR', 'SSV', 'TJS', 'NKN', 'JOD', 'KLAY', 'RAD', 'BNT', 'REQ', 'RCN', 'FET', 'CTK', 'XLM', 'SHIB', 'FXS', 'ALICE', 'MDX', 'NULS', 'SXP', 'WSOL', 'RNDR', 'KZT', 'MNT', 'PGALA', 'YFII', 'ENS', 'C98', 'GAS', 'DAR', 'TRB', 'SKL', 'WBNB', 'ACH', 'AERGO', 'ZAR', 'STEEM', 'BAKE', 'BOND', 'PEPE', 'SUN', 'EGP', 'BURGER', 'KEYFI', 'MC', 'SOLO', 'NOK', 'RAY', 'BADGER', 'NFT', 'PERL', 'DASH', 'TKO', 'ETC', 'YGG', 'PHP', 'YFIUP', 'CAN', 'TCT', 'LINKDOWN', 'EOSDOWN', 'QLC', 'PORTO', 'NVT', 'NEO', 'AR', 'BIFI', 'ZRX', 'WOO', 'FORTH', 'MASK', 'UFT', 'ID', 'SUSHIDOWN', 'FIL', 'UMA', 'RDNT', 'SYN', 'BTCDOWN', 'API3', 'AUD', 'BYN', 'FLM', 'LSK', 'DUSK', 'ALPACA', 'MOVR', 'GHST', 'HBAR', 'CHESS', 'ACM', 'TLM', 'DYDX', 'PLN', 'HRK', 'FIS', 'QUICK', 'BGBP', 'LINA', 'BLZ', 'XLMDOWN', 'BTTOLD', 'GMX', 'FIRO', 'ASR', 'RPL', 'BNC', 'XTZ', 'IOTA', 'EOS', 'ETH', 'DOP', 'BTCUP', 'AST', 'PNT', 'DZD', 'ETHW', 'LTO', 'QTUM', 'MOB', 'STG', 'FLOW', 'CHR', 'HIGH', 'JOE', 'XRP', 'ICP', 'XOF', 'NEXO', 'ZIL', 'DOTDOWN', 'KES', 'GHS', 'LEVER', 'QAR', 'CAD', 'PSG', 'VAI', 'FUN', 'VOXEL', 'RIF', 'AGIX', 'ATA', 'HOT', 
+'OCEAN', 'SFP', 'REI', 'RON', 'DOCK', 'CLV', 'GYEN', 'ENJ', 'NMR', 'MDT', 'TRU', 'TRX', 'GRT', 'KP3R', 'KEY', 'GNO', 'DATA', 'ETB', 'KAVA', 'GMT', 'LTCDOWN', 'EDU', 'BAND', 'LINKUP', 'APE', 'TZS', 'ARPA', 'BHD', 'PLA', 'FLUX', 'ADA', 
+'CELR', 'ATOM', 'LQTY', 'FIDA', 'GAL', 'PEN', 'AUDIO', 'ADAUP', 'WBETH', 'COP', 'KGS', 'WRX', 'CITY', 'UGX', 'MMK', 'VRT', 'TMT', 'EFI', 'BCX', 'KNC', 'IDRT', 'COMP', 'GFT', 'GRTDOWN', 'BETH', 'GTC', 'PHA', 'SYS', 'WAVES', 'KDA', 'SUPER', 'CZK', 'USDC', 'AUTO', 'BICO', 'GEL', 'TOMO', 'BETA', 'XRPDOWN', 'UNIDOWN', 'BIDR', 'QI', 'SEK', 'SAND', 'BTC', 'CFX', 'WAN', 'ALPHA', 'STRAX', 'AAVE', 'AUCTION', 'BSW', 'OAX', 'UNIUP', 'TRXUP', 'MTL', 'AFN', 'XEC', 'PYR', 'MULTI', 'DEXE', 'SNT', 'HUF', 'GBP', 'BNB', 'UTK', 'QNT', 'PERP', 'CKB', 'HKD', 'AMP', 'SANTOS', 'TND', 'LTC', 'SXPUP', 'SUSHIUP', 'USDT', 'USTC', 'SCRT', 'SLP', 'WTC', 'LOOKS', 'LUNA', 'COCOS', 'XVG', 'CVP', 'ELF', 'JUV', 'BUSD', 'DENT', 
+'CAKE', 'DOTUP', 'LPT', 'POLYX', 'EPS', 'GRTUP', 'OMG', 'AMD', 'ATM', 'LBA', 'ARB', 'OMR', 'FLOKI', 'PHB', 'CREAM', 'NGN', 'RDNTOLD', 'COS', 'AVA', 'SBTC', 'FTT', 'EOSUP', 'LYD', 'FOR', 'JST', 'RSR', 'AAVEDOWN', 'ROSE', 'ALPINE', 'TORN', 'OP', 'LDO', 'LOKA', 'WAXP', 'DODO', 'POWR', 'MANA', 'ERN', 'THETA', 'LINK', 'ONT', 'PEOPLE', 'VITE', 'ADX', 'ILV', 'LAK', 'RARE', 'VIB', 'AKRO', 'CELO', 'APT', 'VND', 'USDP', 'PAXG', 'ZEN', 'TRY', 'JEX', 'FRONT', 'TUSD', 'ETHUP', 'IRIS', 'UZS', 'SC', 'RUNE', 'SNM', 'CTXC', 'LOOM', 'ARK', 'BAL', 'BNBUP', 'EUR', 'STX', 'BAT', 'XTZUP', 'JPY', 'IDR', 'UNI', 'BTS', 'EPX', 'GLMR', 'ANT', '1INCH', 'OGN', 'LUNC', 'ONE', 'NEAR', 'VGX', 'VTHO', 'BRL', 'STORJ', 'AVAX', 
+'REN', 'MATIC', 'OOKI', 'BDOT', 'OXT', 'XVS', 'DEGO', 'ETHDOWN', 'KSM', 'POLS', 'USD', 'SNX', 'INR', 'CRV', 'XTZDOWN', 'NEBL', 'RUB', 'AMB', 'KMD', 'DCR', 'TRXDOWN', 'POND', 'CVX', 'IQ']
+# Create a Binance client instance
+stable = ["USDT","TUSD","BUSD"]
+client = Client(api_key, api_secret)
 
-def get_binance_pairs():
-    # Получаем список торговых пар
-    response = requests.get("https://api.binance.com/api/v3/exchangeInfo")
-    symbols = response.json()["symbols"]
+def get_price(symbol, mode='buy'):
+    try:
+        depth = client.get_order_book(symbol=symbol)
+        if depth['asks'] and mode == 'buy':
+            price = float(depth['asks'][0][0])
+        elif depth['bids'] and mode == 'sell':
+            price = float(depth['bids'][0][0])
+        else:
+            try:
+                symbol = reverse_symbol(symbol)
+                depth = client.get_order_book(symbol=symbol)
+                if depth['asks'] and mode == 'sell':  # Notice the reversal of mode as well
+                    price = float(depth['asks'][0][0])
+                elif depth['bids'] and mode == 'buy':  # Notice the reversal of mode as well
+                    price = float(depth['bids'][0][0])
+                else:
+                    price = 0.0
+            except binance.exceptions.BinanceAPIException:
+                price = 0.0
+    except:
+        try:
+            symbol = reverse_symbol(symbol)
+            depth = client.get_order_book(symbol=symbol)
+            if depth['asks'] and mode == 'sell':  # Notice the reversal of mode as well
+                price = float(depth['asks'][0][0])
+            elif depth['bids'] and mode == 'buy':  # Notice the reversal of mode as well
+                price = float(depth['bids'][0][0])
+            else:
+                price = 0.0
+        except binance.exceptions.BinanceAPIException:
+            price = 0.0
+    return price
 
-    # Фильтруем пары с USDT
-    usdt_pairs = [symbol for symbol in symbols if symbol["quoteAsset"] == "USDT"]
 
-    # Получаем информацию по тикерам
-    response = requests.get("https://api.binance.com/api/v3/ticker/bookTicker")
-    tickers = response.json()
 
-    # Формируем словарь с информацией по тикерам
-    ticker_dict = {ticker["symbol"]: ticker for ticker in tickers}
+def reverse_symbol(symbol):
+    for currency in currencies_all:
+        if symbol.endswith(currency):
+            return symbol[:-len(currency)] + currency
 
-    # Получаем полные названия токенов с CoinGecko API
-    response = requests.get("https://api.coingecko.com/api/v3/coins/list")
-    coin_data = response.json()
-    coin_name_dict = {coin["symbol"].upper(): coin["name"] for coin in coin_data}
+def get_pairs_for_currency(currency, tickers):
+    pairs = []
+    for ticker in tickers:
+        if ticker['symbol'].startswith(currency) and len(ticker['symbol'].split(currency)[0]) == 0:
+            pairs.append(ticker)
+    return pairs
 
-    result = []
+def reform_cycle(cycle):
+    try:
+        pair_1, pair_2, pair_3  = cycle
+        for end in currencies_all:
+            if pair_1['symbol'].endswith(end):
+                pair_1_end = end
+        if not pair_2['symbol'].startswith(pair_1_end):
+            pair_2['symbol'] = reverse_symbol(pair_2['symbol'])
+        for end in currencies_all:
+            if pair_2['symbol'].endswith(end):
+                pair_2_end = end
+        if not pair_3['symbol'].startswith(pair_2_end):
+            pair_3['symbol'] = reverse_symbol(pair_3['symbol'])
+    except:
+        return
 
-    for pair in usdt_pairs:
-        symbol = pair["symbol"]
-        base_asset_symbol = pair["baseAsset"]
-        quote_asset_symbol = pair["quoteAsset"]
+    return pair_1 ,  pair_2 , pair_3
 
-        if symbol in ticker_dict:
-            base_asset_name = coin_name_dict.get(base_asset_symbol, base_asset_symbol)
+def get_trade_fee(symbol):
+    trade_fee = client.get_trade_fee(symbol=symbol)
+    return float(trade_fee[0]["takerCommission"])
 
-            ask_price = ticker_dict[symbol]["askPrice"]
-            bid_price = ticker_dict[symbol]["bidPrice"]
-            result.append({
-                "symbol": symbol,
-                "baseAssetName": base_asset_name,
-                "askPrice": ask_price,
-                "bidPrice": bid_price
-            })
+def check_arbitrage(cycle):
+    try:
+        pair_1, pair_2, pair_3 = reform_cycle(cycle)
+        buy_price_1 = get_price(pair_1['symbol'], 'buy')
+        if buy_price_1 > 0:
+            sell_price_2 = get_price(pair_2['symbol'], 'sell')
+            if sell_price_2 > 0 :
+                sell_price_3 = get_price(pair_3['symbol'], 'sell')
+                if sell_price_3 > 0: 
+                    initial_investment = 1000
+                    after_first_trade = initial_investment / buy_price_1
 
-    return result
+                    # Получение комиссии для первой пары
+                    commission_rate_1 = get_trade_fee(pair_1['symbol'])
+                    commission_1 = after_first_trade * commission_rate_1
 
-usdt_pairs_with_prices = get_binance_pairs()
-print(usdt_pairs_with_prices)
+                    after_first_trade -= commission_1
+                    after_second_trade = after_first_trade / sell_price_2
+
+                    # Получение комиссии для второй пары
+                    commission_rate_2 = get_trade_fee(pair_2['symbol'])
+                    commission_2 = after_second_trade * commission_rate_2
+
+                    after_second_trade -= commission_2
+                    final_amount = after_second_trade * sell_price_3
+
+                    # Получение комиссии для третьей пары
+                    commission_rate_3 = get_trade_fee(pair_3['symbol'])
+                    commission_3 = final_amount * commission_rate_3
+
+                    final_amount -= commission_3
+                    profit = final_amount - initial_investment
+
+                    # if profit > 0:
+                    print(f"Arbitrage Opportunity: Buy {pair_1['symbol']}, sell {pair_2['symbol']}, sell {pair_3['symbol']}")
+                    print(f"Profit: {profit} USD\n")
+    except:
+        pass
+def get_pairs_for_currency_reverse(currency, tickers):
+    return [ticker for ticker in tickers if currency in ticker['symbol']]
+
+def analyze_arbitrage_opportunities(tickers):
+    for start_currency in stable:
+        first_pairs = get_pairs_for_currency_reverse(start_currency, tickers)
+        for pair in first_pairs:
+            if pair['symbol'].startswith(start_currency) and float(pair['bidPrice']) > 0:  # if start_currency is base currency
+                intermediate_currency = pair['symbol'].replace(start_currency, '')
+            else:
+                intermediate_currency = False
+            if intermediate_currency:
+                second_pairs = get_pairs_for_currency_reverse(intermediate_currency, tickers)
+                for second_pair in second_pairs:
+                    if second_pair['symbol'].startswith(intermediate_currency) and float(pair['bidPrice']) > 0 :  # if intermediate_currency is base currency
+                        end_currency = second_pair['symbol'].replace(intermediate_currency, '')
+                    else:  # if intermediate_currency is quote currency
+                        if float(second_pair['bidPrice']) > 0:
+                            end_currency = second_pair['symbol'].replace(intermediate_currency, '')
+                        else:
+                            end_currency = False
+                    if pair['symbol'].startswith(start_currency) and float(pair['bidPrice']) > 0:  # if start_currency is base in first pair
+                        end_pair = next((ticker for ticker in tickers if ticker['symbol'] == start_currency + end_currency), None)
+                    else:  # if start_currency is quote in first pair
+                        if float(end_pair['bidPrice']) > 0:
+                            end_pair = next((ticker for ticker in tickers if ticker['symbol'] == end_currency + start_currency), None)
+                        else:
+                            end_pair = False
+                    if end_pair:
+                        check_arbitrage([pair, second_pair, end_pair])
+
+#PROSUSDT USDTBTC BTCPROS
+tickers = client.get_ticker()
+analyze_arbitrage_opportunities(tickers)

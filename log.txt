@@ -65,3 +65,364 @@ Traceback (most recent call last):
   File "C:\Users\ART\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
     raise err(cls.text or description)
 aiogram.utils.exceptions.MessageNotModified: Message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+[2023-05-26 | 15:49: INFO:] Bot started
+[2023-05-26 | 15:49: INFO:] DataBase started
+[2023-05-26 | 15:49: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 15:49: INFO:] Start polling.
+[2023-05-26 | 15:49: INFO:] Bot started
+[2023-05-26 | 15:49: INFO:] DataBase started
+[2023-05-26 | 15:49: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 15:49: INFO:] Start polling.
+[2023-05-26 | 15:50: INFO:] Bot started
+[2023-05-26 | 15:50: INFO:] DataBase started
+[2023-05-26 | 15:50: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 15:50: INFO:] Start polling.
+[2023-05-26 | 15:50: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-15' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=AttributeError("'HTTP' object has no attribute 'best_bid_ask_price'")>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 42, in get_all_token_bybit
+    results = http.best_bid_ask_price()
+AttributeError: 'HTTP' object has no attribute 'best_bid_ask_price'
+[2023-05-26 | 15:50: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-52' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=AttributeError("'HTTP' object has no attribute 'best_bid_ask_price'")>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 42, in get_all_token_bybit
+    results = http.best_bid_ask_price()
+AttributeError: 'HTTP' object has no attribute 'best_bid_ask_price'
+[2023-05-26 | 15:50: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-87' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=AttributeError("'HTTP' object has no attribute 'best_bid_ask_price'")>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 42, in get_all_token_bybit
+    results = http.best_bid_ask_price()
+AttributeError: 'HTTP' object has no attribute 'best_bid_ask_price'
+[2023-05-26 | 15:50: INFO:] Bot started
+[2023-05-26 | 15:50: INFO:] DataBase started
+[2023-05-26 | 15:50: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 15:55: INFO:] Bot started
+[2023-05-26 | 15:55: INFO:] DataBase started
+[2023-05-26 | 15:55: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 15:55: INFO:] Start polling.
+[2023-05-26 | 15:55: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-11' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=AttributeError("'HTTP' object has no attribute 'get_symbols'")>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 42, in get_all_token_bybit
+    results = http.get_symbols()
+AttributeError: 'HTTP' object has no attribute 'get_symbols'
+[2023-05-26 | 15:55: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-48' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=AttributeError("'HTTP' object has no attribute 'get_symbols'")>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 42, in get_all_token_bybit
+    results = http.get_symbols()
+AttributeError: 'HTTP' object has no attribute 'get_symbols'
+[2023-05-26 | 15:55: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-86' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=AttributeError("'HTTP' object has no attribute 'get_symbols'")>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 42, in get_all_token_bybit
+    results = http.get_symbols()
+AttributeError: 'HTTP' object has no attribute 'get_symbols'
+[2023-05-26 | 15:56: INFO:] Bot started
+[2023-05-26 | 15:56: INFO:] DataBase started
+[2023-05-26 | 15:56: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 15:56: INFO:] Start polling.
+[2023-05-26 | 15:56: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-6' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=AttributeError("'HTTP' object has no attribute 'get_symbols'")>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 42, in get_all_token_bybit
+    results = http.get_symbols()
+AttributeError: 'HTTP' object has no attribute 'get_symbols'
+[2023-05-26 | 15:56: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-53' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=AttributeError("'HTTP' object has no attribute 'get_symbols'")>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 42, in get_all_token_bybit
+    results = http.get_symbols()
+AttributeError: 'HTTP' object has no attribute 'get_symbols'
+[2023-05-26 | 17:23: INFO:] Bot started
+[2023-05-26 | 17:23: INFO:] DataBase started
+[2023-05-26 | 17:23: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 17:23: INFO:] Start polling.
+[2023-05-26 | 17:25: INFO:] Bot started
+[2023-05-26 | 17:25: INFO:] DataBase started
+[2023-05-26 | 17:25: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 17:25: INFO:] Start polling.
+[2023-05-26 | 17:25: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-9' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=KeyError('data')>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 44, in get_all_token_bybit
+    for ticker_info in tickers_data['data']:
+KeyError: 'data'
+[2023-05-26 | 17:25: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-55' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=KeyError('data')>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 44, in get_all_token_bybit
+    for ticker_info in tickers_data['data']:
+KeyError: 'data'
+[2023-05-26 | 17:25: ERROR:] Task exception was never retrieved
+future: <Task finished name='Task-90' coro=<get_all_token_bybit() done, defined at c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py:40> exception=KeyError('data')>
+Traceback (most recent call last):
+  File "c:\Users\LENOVO\Desktop\crypto_svyzki\crypto_svyazki\crypto_obrabotka\crypto_bot.py", line 44, in get_all_token_bybit
+    for ticker_info in tickers_data['data']:
+KeyError: 'data'
+[2023-05-26 | 17:25: INFO:] Bot started
+[2023-05-26 | 17:25: INFO:] DataBase started
+[2023-05-26 | 17:25: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 17:25: INFO:] Start polling.
+[2023-05-26 | 17:26: INFO:] Bot started
+[2023-05-26 | 17:26: INFO:] DataBase started
+[2023-05-26 | 17:26: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 17:26: INFO:] Start polling.
+[2023-05-26 | 17:27: INFO:] Bot started
+[2023-05-26 | 17:27: INFO:] DataBase started
+[2023-05-26 | 17:27: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 17:27: INFO:] Start polling.
+[2023-05-26 | 17:29: INFO:] Bot started
+[2023-05-26 | 17:29: INFO:] DataBase started
+[2023-05-26 | 17:29: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 17:29: INFO:] Start polling.
+[2023-05-26 | 17:33: INFO:] Bot started
+[2023-05-26 | 17:33: INFO:] DataBase started
+[2023-05-26 | 17:33: INFO:] Bot: Crypto_bot [@crypto_nuu_bot]
+[2023-05-26 | 17:33: INFO:] Start polling.
+[2023-05-29 | 00:01: ERROR:] Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1138, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 559, in _request
+    await resp.start(conn)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client_reqrep.py", line 893, in start
+    with self._timer:
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\helpers.py", line 721, in __exit__
+    raise asyncio.TimeoutError from None
+asyncio.exceptions.TimeoutError
+[2023-05-29 | 00:01: ERROR:] Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1154, in _create_direct_connection
+    hosts = await asyncio.shield(host_resolved)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 880, in _resolve_host
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\resolver.py", line 33, in resolve
+    infos = await self._loop.getaddrinfo(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 855, in getaddrinfo
+    return await self.run_in_executor(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11004] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1138, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 535, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 542, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 907, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1166, in _create_direct_connection
+    raise ClientConnectorError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+[2023-05-29 | 00:01: ERROR:] Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1154, in _create_direct_connection
+    hosts = await asyncio.shield(host_resolved)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 880, in _resolve_host
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\resolver.py", line 33, in resolve
+    infos = await self._loop.getaddrinfo(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 855, in getaddrinfo
+    return await self.run_in_executor(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11004] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1138, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 535, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 542, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 907, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1166, in _create_direct_connection
+    raise ClientConnectorError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+[2023-05-29 | 00:01: ERROR:] Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1154, in _create_direct_connection
+    hosts = await asyncio.shield(host_resolved)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 880, in _resolve_host
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\resolver.py", line 33, in resolve
+    infos = await self._loop.getaddrinfo(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 855, in getaddrinfo
+    return await self.run_in_executor(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11004] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1138, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 535, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 542, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 907, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1166, in _create_direct_connection
+    raise ClientConnectorError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+[2023-05-29 | 00:01: ERROR:] Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1154, in _create_direct_connection
+    hosts = await asyncio.shield(host_resolved)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 880, in _resolve_host
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\resolver.py", line 33, in resolve
+    infos = await self._loop.getaddrinfo(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 855, in getaddrinfo
+    return await self.run_in_executor(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11004] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1138, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 535, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 542, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 907, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1166, in _create_direct_connection
+    raise ClientConnectorError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+[2023-05-29 | 00:01: ERROR:] Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1154, in _create_direct_connection
+    hosts = await asyncio.shield(host_resolved)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 880, in _resolve_host
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\resolver.py", line 33, in resolve
+    infos = await self._loop.getaddrinfo(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 855, in getaddrinfo
+    return await self.run_in_executor(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11002] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 1138, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\client.py", line 535, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 542, in connect
+    proto = await self._create_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 907, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiohttp\connector.py", line 1166, in _create_direct_connection
+    raise ClientConnectorError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python310\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [getaddrinfo failed]

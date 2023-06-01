@@ -1,14 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup , KeyboardButton , InlineKeyboardMarkup , InlineKeyboardButton
 from aiogram.dispatcher import FSMContext
-async def get_button_subscribe():
-   menu_subscribe = InlineKeyboardMarkup(row_widht = 1)  
 
-   buy_subscribe = InlineKeyboardButton(f"📍Активировать подписку", callback_data="subs_open_button")
-
-
-   menu_subscribe.add(buy_subscribe)
-
-   return menu_subscribe
 
 
 async def get_prices():

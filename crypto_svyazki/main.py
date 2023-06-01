@@ -6,7 +6,7 @@ from crypto_obrabotka.crypto_bot import waiting
 import asyncio
 from logger import log
 async def create(dispatcher: Dispatcher):
-    asyncio.create_task(waiting())
+    # asyncio.create_task(waiting())
     await db.create()
 
 # test test

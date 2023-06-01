@@ -16,7 +16,7 @@ from kucoin.client import Market, Trade
 from loader import bot, dp , db
 #===========================================
 from binance.client import Client    #Бинанс
-from pybit import HTTP               #ByBit
+from pybit.unified_trading import HTTP         #ByBit
 client = Client(api_key=api_key, api_secret=api_secret)
 http = HTTP()
 market_client = Market(url='https://api.kucoin.com')
@@ -38,12 +38,15 @@ async def get_all_token_binance():
         if not any(token["symbol"].replace("USDT","").lower() in currency.lower() for currency in ban_token) and token["symbol"].replace("USDT","").lower()[-2:] not in ["3s","3l"] :
             prices["binance"][token["symbol"].replace("USDT","").lower()] = (float(token["askPrice"]), float(token["bidPrice"]))
 async def get_all_token_bybit():
-    global HTTP
-    results = http.best_bid_ask_price()
-    for x in results.get("result"):
-        if "USDT" in x["symbol"]  and not any(x["symbol"].replace("USDT","").lower() in currency.lower() for currency in ban_token) and x["symbol"].replace("USDT","").lower()[-2:]not in ["3s","3l"]:
-            prices["bybit"][x["symbol"].replace("USDT","").lower()] = (float(x["askPrice"]), float(x["bidPrice"]))
-
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://api.crypto.com/v2/public/get-ticker") as response:
+            tickers_data = await response.json()
+            for ticker_info in tickers_data['result']["data"]:
+                symbol = ticker_info['i']
+                # Check the conditions
+                if "USDT" in symbol and not any(symbol.replace("_USDT", "").lower() in currency.lower() for currency in ban_token) and symbol.replace("_USDT", "").lower()[-2:] not in ["3s", "3l"]:
+                    # Add the best bid and ask prices to the prices dictionary
+                    prices["bybit"][symbol.replace("_USDT", "").lower()] = (float(ticker_info['a']), float(ticker_info['b']))
 async def get_all_token_kraken():
     async with aiohttp.ClientSession() as session:
         async with session.get("https://api.kraken.com/0/public/Ticker") as response:

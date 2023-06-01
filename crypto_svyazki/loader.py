@@ -16,3 +16,4 @@ dp = Dispatcher(
     )
 db = DateBase()
 import crypto_obrabotka.crypto_bot , BOT.start_handler , BOT.procent_handler , BOT.subscribe_handler , BOT.settings_handler
+import BOT.profile_handler
