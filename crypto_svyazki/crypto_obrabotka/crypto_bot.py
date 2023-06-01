@@ -256,13 +256,14 @@ async def get_address_token(token,adress1,addres2):
         url_adrrss1 = url_adress[adress1].replace("token",token.lower()) 
     if addres2 == "huobi":
         url_adrrss1 = url_adress[adress1].replace("token",token.lower()) 
-    text_link = f'<a href="{url_adrrss1}">Купить</a>|<a href="{url_adrrss2}">Продать</a>'
+    text_link = f'<a href="{url_adrrss1}">Buy</a>|<a href="{url_adrrss2}">Sell</a>'
     return text_link
 
 async def send_inforamtion(arr_tokens):
     list_users = await db.get_all_users_info()
     for user in list_users:
         id_user           = user[0]
+        lang              = await db.select_user(id_user)
         arr_token_ban     = await db.get_ban_token(id_user)
         birje_status      = await db.get_status_birje(id_user)
         status_dict = {key: value for key, value in (status.split(":") for status in birje_status.split(","))}
@@ -273,7 +274,7 @@ async def send_inforamtion(arr_tokens):
             continue
         elif int(time.time()) >= int(subscribe):
             await db.delete_subscribe(id_user)
-            await bot.send_message(id_user,"‼️ <b>У вас закончилось время активной подписки</b> ‼️\n\nЧтобы <b>обновить подписку</b> , продлите ее в личном кабинете")
+            await bot.send_message(id_user, await db.get_translated_text("‼️ <b>У вас закончилось время активной подписки</b> ‼️\n\nЧтобы <b>обновить подписку</b> , продлите ее в личном кабинете", lang[0]))
         elif int(time.time()) <= int(subscribe):
             text = ""
             for info in arr_tokens:
@@ -294,6 +295,6 @@ async def send_inforamtion(arr_tokens):
                 result = ['\n'.join(arr_text[i:i+n]) for i in range(0, len(arr_text), n)]
                 for texts in result:
                     if len(text) > 1:
-                        await bot.send_message(id_user,"▫️ <b>Нашлись крипто связки</b> ▫️\n\n"+texts,disable_web_page_preview=True)
+                        await bot.send_message(id_user,(await db.get_translated_text("▫️ <b>Нашлись крипто связки</b> ▫️\n\n{}", lang[0])).format(texts),disable_web_page_preview=True)
                         await asyncio.sleep(300)
 

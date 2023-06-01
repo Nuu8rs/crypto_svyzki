@@ -24,15 +24,17 @@ from config.utils import adress , TRONGRID_API_URL , usdt_trc20_contract_address
 
 @dp.callback_query_handler(text_contains="subs_open_button",state="*")
 async def add_otvet(query: CallbackQuery, state: FSMContext):
-   await query.message.edit_text("<b>🧰 Тут вы можете активировать/продлить свою подписку</b>\n\n📕Подписка на <b>1 день</b> - <code>3 usdt</code>\n📗Подписка на <b>7 дней</b> - <code>7 usdt</code>\n📘Подписка на <b>31 день</b> - <code>30 usdt</code>",reply_markup= await get_prices())
+   lang = await db.select_user(query.from_user.id)
+   await query.message.edit_text(await db.get_translated_text("<b>🧰 Тут вы можете активировать/продлить свою подписку</b>\n\n📕Подписка на <b>1 день</b> - <code>3 usdt</code>\n📗Подписка на <b>7 дней</b> - <code>7 usdt</code>\n📘Подписка на <b>31 день</b> - <code>30 usdt</code>", lang[0]),reply_markup= await get_prices())
 
 
 
 @dp.callback_query_handler(text_contains="buy",state="*")
 async def add_otvet(query: CallbackQuery, state: FSMContext):
    await query.answer()
+   lang = await db.select_user(query.from_user.id)
    photo = await get_qr_usdt()
-   await bot.send_photo(query.from_user.id , photo=photo , caption=f"""➖ <b><u>Адрес</u></b> : <code>{adress}</code>\n\n<b><u>➖ Сумма пополнения</u></b> : {query.data.split(":")[-1]} USDT""",reply_markup=await check_status_update_balance())
+   await bot.send_photo(query.from_user.id , photo=photo , caption=(await db.get_translated_text("""➖ <b><u>Адрес</u></b> : <code>{}</code>\n\n<b><u>➖ Сумма пополнения</u></b> : {} USDT""", lang[0])).format(adress, query.data.split(":")[-1]),reply_markup=await check_status_update_balance())
 
 
 async def get_qr_usdt():
