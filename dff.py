@@ -53,8 +53,13 @@ def get_price(symbol, mode='buy'):
 def reverse_symbol(symbol):
     for currency in currencies_all:
         if symbol.endswith(currency):
-            return symbol[:-len(currency)] + currency
-
+            currency2 = symbol[:-len(currency)]
+            if currency2 in currencies_all:
+                return currency + currency2
+        if symbol.startswith(currency):
+            currency2 = symbol[len(currency):]
+            if currency2 in currencies_all:
+                return currency2 + currency
 def get_pairs_for_currency(currency, tickers):
     pairs = []
     for ticker in tickers:
@@ -82,16 +87,20 @@ def reform_cycle(cycle):
 
 def get_trade_fee(symbol):
     trade_fee = client.get_trade_fee(symbol=symbol)
-    return float(trade_fee[0]["takerCommission"])
-
+    try:
+        assert(float(trade_fee[0]["takerCommission"]))
+        return float(trade_fee[0]["takerCommission"])
+    except:
+        trade_fee = client.get_trade_fee(symbol=reverse_symbol(symbol))
+        return 0.01
 def check_arbitrage(cycle):
     try:
-        pair_1, pair_2, pair_3 = reform_cycle(cycle)
-        buy_price_1 = get_price(pair_1['symbol'], 'buy')
+        pair_1, pair_2, pair_3 = cycle
+        buy_price_1 = float(pair_1["askPrice"])
         if buy_price_1 > 0:
-            sell_price_2 = get_price(pair_2['symbol'], 'sell')
+            sell_price_2  = float(pair_2["bidPrice"])
             if sell_price_2 > 0 :
-                sell_price_3 = get_price(pair_3['symbol'], 'sell')
+                sell_price_3 = float(pair_3["bidPrice"])
                 if sell_price_3 > 0: 
                     initial_investment = 1000
                     after_first_trade = initial_investment / buy_price_1
@@ -125,14 +134,38 @@ def check_arbitrage(cycle):
 def get_pairs_for_currency_reverse(currency, tickers):
     return [ticker for ticker in tickers if currency in ticker['symbol']]
 
+def reform_cycle_start(cycle):
+    try:
+        pair_1, pair_2, pair_3  = cycle
+        for st in currencies_all:
+            if pair_1['symbol'].endswith(st):
+                last_sv_1 =  st
+                start_sv = pair_1['symbol'].split(st)[0]
+                break
+        if not pair_2['symbol'].startswith(last_sv_1):
+            last_sv_2 = pair_2['symbol'].split(last_sv_1)[0]
+            pair_2['symbol'] = last_sv_1 + pair_2['symbol'].split(last_sv_1)[0]
+            pair_2["askPrice"] = str(float(pair_2["askPrice"])**-1)
+            pair_2["bidPrice"] = str(float(pair_2["bidPrice"])**-1)          
+
+        if not pair_3['symbol'].endswith(start_sv):
+            pair_3['symbol'] = pair_3['symbol'].split(start_sv)[1] + start_sv
+            pair_3["askPrice"] = str(float(pair_2["askPrice"])**-1)
+            pair_3["bidPrice"] = str(float(pair_2["bidPrice"])**-1) 
+    except Exception as E:
+        print(E)
+        return
+
+    return pair_1 ,  pair_2 , pair_3
+
 def analyze_arbitrage_opportunities(tickers):
-    for start_currency in stable:
+    for start_currency in currencies_all:
         first_pairs = get_pairs_for_currency_reverse(start_currency, tickers)
         for pair in first_pairs:
             if pair['symbol'].startswith(start_currency) and float(pair['bidPrice']) > 0:  # if start_currency is base currency
                 intermediate_currency = pair['symbol'].replace(start_currency, '')
             else:
-                intermediate_currency = False
+                continue
             if intermediate_currency:
                 second_pairs = get_pairs_for_currency_reverse(intermediate_currency, tickers)
                 for second_pair in second_pairs:
@@ -142,16 +175,17 @@ def analyze_arbitrage_opportunities(tickers):
                         if float(second_pair['bidPrice']) > 0:
                             end_currency = second_pair['symbol'].replace(intermediate_currency, '')
                         else:
-                            end_currency = False
+                            continue
                     if pair['symbol'].startswith(start_currency) and float(pair['bidPrice']) > 0:  # if start_currency is base in first pair
                         end_pair = next((ticker for ticker in tickers if ticker['symbol'] == start_currency + end_currency), None)
                     else:  # if start_currency is quote in first pair
                         if float(end_pair['bidPrice']) > 0:
                             end_pair = next((ticker for ticker in tickers if ticker['symbol'] == end_currency + start_currency), None)
                         else:
-                            end_pair = False
+                            continue
                     if end_pair:
-                        check_arbitrage([pair, second_pair, end_pair])
+                        cycle = reform_cycle_start([pair, second_pair, end_pair])
+                        check_arbitrage(cycle)
 
 #PROSUSDT USDTBTC BTCPROS
 tickers = client.get_ticker()
